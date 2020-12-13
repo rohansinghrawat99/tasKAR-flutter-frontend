@@ -68,7 +68,7 @@ class _GroupMainState extends State<GroupMain> {
               ),
             ],
           ),
-          Expanded(child: Tasks(tabNumber: tabNumber))
+          Expanded(child: TaskListDisplay())
         ],
       ),
     );

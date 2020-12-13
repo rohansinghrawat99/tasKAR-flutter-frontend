@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tasker/models/screen_arguments.dart';
 import 'package:tasker/screens/customs/scaffold.custom.dart';
 import 'package:tasker/screens/tasks.screen.dart';
 
@@ -9,11 +10,19 @@ class MyGroupTasks extends StatefulWidget {
 
 class _MyGroupTasksState extends State<MyGroupTasks> {
   int tabNumber = 1;
+  int groupId;
 
   @override
   Widget build(BuildContext context) {
+    if (groupId == null) {
+      ScreenArguments arguments = ModalRoute.of(context).settings.arguments;
+      groupId = arguments.groupId;
+    }
     return CustomScaffold(
       selected: 2,
+      onTapFAB: () {
+        Navigator.pushNamed(context, "/my-task/create", arguments: ScreenArguments(groupId: groupId));
+      },
       children: Column(
         children: <Widget>[
           Row(
@@ -70,7 +79,7 @@ class _MyGroupTasksState extends State<MyGroupTasks> {
               ),
             ],
           ),
-          Expanded(child: Tasks(tabNumber: tabNumber))
+          Expanded(child: TaskListDisplay())
         ],
       ),
     );

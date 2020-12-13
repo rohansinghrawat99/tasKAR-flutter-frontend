@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:tasker/models/user.dart';
+
+import 'group.dart';
 part 'task.g.dart';
 
 @JsonSerializable()
@@ -22,7 +24,14 @@ abstract class _Task with Store {
 
   @observable
   @JsonKey(name: 'group_id')
-  String groupId;
+  int groupId;
+
+  @observable
+  Group group;
+
+  @observable
+  @JsonKey(name: 'assigned_to_id')
+  int assignedToId;
 
   @observable
   UserModal assignedTo;
@@ -33,6 +42,10 @@ abstract class _Task with Store {
 
   @observable
   String status;
+
+  @observable
+  @JsonKey(name: 'creator_id')
+  int creatorId;
 
   @observable
   UserModal creatorUser;

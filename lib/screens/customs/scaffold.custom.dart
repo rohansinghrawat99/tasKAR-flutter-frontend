@@ -6,7 +6,8 @@ class CustomScaffold extends StatefulWidget {
   final Widget children;
   final Widget tabBar;
   final int selected;
-  CustomScaffold({this.children, this.tabBar, this.selected});
+  final Function onTapFAB;
+  CustomScaffold({this.children, this.tabBar, this.selected, this.onTapFAB});
   @override
   _CustomScaffoldState createState() => _CustomScaffoldState();
 }
@@ -69,7 +70,7 @@ class _CustomScaffoldState extends State<CustomScaffold> {
                 image: new DecorationImage(
                   fit: BoxFit.cover,
                   colorFilter:
-                  ColorFilter.mode(Colors.grey[200].withOpacity(0.5),
+                  ColorFilter.mode(Colors.yellow[200].withOpacity(0.2),
                       BlendMode.dstATop),
                   image: AssetImage(
                     "assets/bg.jpeg",
@@ -96,6 +97,43 @@ class _CustomScaffoldState extends State<CustomScaffold> {
             widget.children
           ]
       ),
+      floatingActionButton: widget.onTapFAB != null ? FloatingActionButton(
+        child: Icon(
+            Icons.add
+        ),
+        backgroundColor: Colors.black87,
+        onPressed: widget.onTapFAB
+      ) : null
+    );
+  }
+
+  // Widget taskDialog() {
+  //   return AlertDialog(
+  //     backgroundColor: Colors.white60,
+  //     title: Text("Add a task", style: GoogleFonts.secularOne(letterSpacing: 1.5)),
+  //     actions: [
+  //       RaisedButton(onPressed: () {
+  //         Navigator.pushNamed(context, "/groups/create");
+  //       }, child: Text("Create", style: GoogleFonts.lobster())),
+  //       RaisedButton(onPressed: () {
+  //         Navigator.pushNamed(context, "/groups/join");
+  //       }, child: Text("Join", style: GoogleFonts.lobster()))
+  //     ],
+  //   );
+  // }
+
+  Widget groupDialog() {
+    return AlertDialog(
+      backgroundColor: Colors.white60,
+      title: Text("Create a group or Join one", style: GoogleFonts.secularOne(letterSpacing: 1.5)),
+      actions: [
+        RaisedButton(onPressed: () {
+          Navigator.pushNamed(context, "/groups/create");
+        }, child: Text("Create", style: GoogleFonts.lobster())),
+        RaisedButton(onPressed: () {
+          Navigator.pushNamed(context, "/groups/join");
+        }, child: Text("Join", style: GoogleFonts.lobster()))
+      ],
     );
   }
 

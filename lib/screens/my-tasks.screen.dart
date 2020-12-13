@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/screens/customs/scaffold.custom.dart';
+import 'package:tasker/screens/customs/store_observer.dart';
 import 'package:tasker/screens/tasks.screen.dart';
+import 'package:tasker/store/my_tasks_store.dart';
 
 class MyTask extends StatefulWidget {
   @override
@@ -14,6 +16,9 @@ class _MyTaskState extends State<MyTask> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       selected: 1,
+      onTapFAB: () {
+        Navigator.pushNamed(context, "/my-task/create");
+      },
       children: Column(
         children: <Widget>[
           Row(
@@ -24,7 +29,7 @@ class _MyTaskState extends State<MyTask> {
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 1 ? 4 : 0,
-                  color: Colors.white10,
+                  color: Colors.grey,
                     onPressed: () {
                       setState(() {
                         tabNumber = 1;
@@ -36,7 +41,7 @@ class _MyTaskState extends State<MyTask> {
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 2 ? 4 : 0,
-                    color: Colors.white10,
+                    color: Colors.grey,
                     onPressed: () {
                       setState(() {
                         tabNumber = 2;
@@ -48,7 +53,7 @@ class _MyTaskState extends State<MyTask> {
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 3 ? 4 : 0,
-                    color: Colors.white10,
+                    color: Colors.grey,
                     onPressed: () {
                       setState(() {
                         tabNumber = 3;
@@ -58,7 +63,26 @@ class _MyTaskState extends State<MyTask> {
               ),
             ],
           ),
-          Expanded(child: Tasks(tabNumber: tabNumber))
+          Expanded(
+            child: StoreObserver<MyTasksStore>(builder: (MyTasksStore myTaskStore, BuildContext context) {
+              myTaskStore.fetchMyToDos();
+              myTaskStore.fetchMyCompleted();
+              myTaskStore.fetchMyOverdue();
+              if (myTaskStore.isLoading) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (tabNumber == 1) {
+                return TaskListDisplay(tasks: myTaskStore.myToDo == null ? [] : myTaskStore.myToDo.values.toList());
+              }
+              if (tabNumber == 2) {
+                return TaskListDisplay(tasks: myTaskStore.myCompleted == null ? [] : myTaskStore.myCompleted.values.toList());
+              }
+              if (tabNumber == 3) {
+                return TaskListDisplay(tasks: myTaskStore.myOverdue == null ? [] : myTaskStore.myOverdue.values.toList());
+              }
+              return TaskListDisplay(tasks: []);
+            }),
+          )
         ],
       ),
     );

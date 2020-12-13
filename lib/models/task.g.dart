@@ -11,12 +11,17 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as int
     ..title = json['title'] as String
     ..description = json['description'] as String
-    ..groupId = json['group_id'] as String
+    ..groupId = json['group_id'] as int
+    ..group = json['group'] == null
+        ? null
+        : Group.fromJson(json['group'] as Map<String, dynamic>)
+    ..assignedToId = json['assigned_to_id'] as int
     ..assignedTo = json['assignedTo'] == null
         ? null
         : UserModal.fromJson(json['assignedTo'] as Map<String, dynamic>)
     ..dueTime = json['due_time'] as String
     ..status = json['status'] as String
+    ..creatorId = json['creator_id'] as int
     ..creatorUser = json['creatorUser'] == null
         ? null
         : UserModal.fromJson(json['creatorUser'] as Map<String, dynamic>)
@@ -29,9 +34,12 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'group_id': instance.groupId,
+      'group': instance.group,
+      'assigned_to_id': instance.assignedToId,
       'assignedTo': instance.assignedTo,
       'due_time': instance.dueTime,
       'status': instance.status,
+      'creator_id': instance.creatorId,
       'creatorUser': instance.creatorUser,
       'createdAt': instance.createdAt,
       'updatedAt': instance.updatedAt,
@@ -98,18 +106,52 @@ mixin _$Task on _Task, Store {
   final _$groupIdAtom = Atom(name: '_Task.groupId');
 
   @override
-  String get groupId {
+  int get groupId {
     _$groupIdAtom.context.enforceReadPolicy(_$groupIdAtom);
     _$groupIdAtom.reportObserved();
     return super.groupId;
   }
 
   @override
-  set groupId(String value) {
+  set groupId(int value) {
     _$groupIdAtom.context.conditionallyRunInAction(() {
       super.groupId = value;
       _$groupIdAtom.reportChanged();
     }, _$groupIdAtom, name: '${_$groupIdAtom.name}_set');
+  }
+
+  final _$groupAtom = Atom(name: '_Task.group');
+
+  @override
+  Group get group {
+    _$groupAtom.context.enforceReadPolicy(_$groupAtom);
+    _$groupAtom.reportObserved();
+    return super.group;
+  }
+
+  @override
+  set group(Group value) {
+    _$groupAtom.context.conditionallyRunInAction(() {
+      super.group = value;
+      _$groupAtom.reportChanged();
+    }, _$groupAtom, name: '${_$groupAtom.name}_set');
+  }
+
+  final _$assignedToIdAtom = Atom(name: '_Task.assignedToId');
+
+  @override
+  int get assignedToId {
+    _$assignedToIdAtom.context.enforceReadPolicy(_$assignedToIdAtom);
+    _$assignedToIdAtom.reportObserved();
+    return super.assignedToId;
+  }
+
+  @override
+  set assignedToId(int value) {
+    _$assignedToIdAtom.context.conditionallyRunInAction(() {
+      super.assignedToId = value;
+      _$assignedToIdAtom.reportChanged();
+    }, _$assignedToIdAtom, name: '${_$assignedToIdAtom.name}_set');
   }
 
   final _$assignedToAtom = Atom(name: '_Task.assignedTo');
@@ -161,6 +203,23 @@ mixin _$Task on _Task, Store {
       super.status = value;
       _$statusAtom.reportChanged();
     }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
+  final _$creatorIdAtom = Atom(name: '_Task.creatorId');
+
+  @override
+  int get creatorId {
+    _$creatorIdAtom.context.enforceReadPolicy(_$creatorIdAtom);
+    _$creatorIdAtom.reportObserved();
+    return super.creatorId;
+  }
+
+  @override
+  set creatorId(int value) {
+    _$creatorIdAtom.context.conditionallyRunInAction(() {
+      super.creatorId = value;
+      _$creatorIdAtom.reportChanged();
+    }, _$creatorIdAtom, name: '${_$creatorIdAtom.name}_set');
   }
 
   final _$creatorUserAtom = Atom(name: '_Task.creatorUser');

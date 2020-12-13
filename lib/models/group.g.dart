@@ -10,6 +10,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
   return Group()
     ..id = json['id'] as int
     ..name = json['name'] as String
+    ..adminId = json['admin_id'] as int
     ..admin = json['admin'] == null
         ? null
         : UserModal.fromJson(json['admin'] as Map<String, dynamic>)
@@ -21,6 +22,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'admin_id': instance.adminId,
       'admin': instance.admin,
       'code': instance.code,
       'createdAt': instance.createdAt,
@@ -66,6 +68,23 @@ mixin _$Group on _Group, Store {
       super.name = value;
       _$nameAtom.reportChanged();
     }, _$nameAtom, name: '${_$nameAtom.name}_set');
+  }
+
+  final _$adminIdAtom = Atom(name: '_Group.adminId');
+
+  @override
+  int get adminId {
+    _$adminIdAtom.context.enforceReadPolicy(_$adminIdAtom);
+    _$adminIdAtom.reportObserved();
+    return super.adminId;
+  }
+
+  @override
+  set adminId(int value) {
+    _$adminIdAtom.context.conditionallyRunInAction(() {
+      super.adminId = value;
+      _$adminIdAtom.reportChanged();
+    }, _$adminIdAtom, name: '${_$adminIdAtom.name}_set');
   }
 
   final _$adminAtom = Atom(name: '_Group.admin');

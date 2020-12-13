@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:tasker/models/task.dart';
+import 'package:tasker/models/user.dart';
+import 'package:tasker/screens/task-main.screen.dart';
+import 'package:tasker/store/user_store.dart';
 
-class Tasks extends StatefulWidget {
-  final tabNumber;
-  Tasks({this.tabNumber});
-  @override
-  _TasksState createState() => _TasksState();
-}
-
-class _TasksState extends State<Tasks> {
-  final tasks = [""];
-
+class TaskListDisplay extends StatelessWidget {
+  final List<Task> tasks;
+  TaskListDisplay({this.tasks});
   @override
   Widget build(BuildContext context) {
+    if (tasks == null || tasks.isEmpty) return Text("NO TASKS YET");
+    UserModal loggedInUser = Provider.of<UserStore>(context).loggedInUser;
+    tasks.sort((a,b) => a.dueTime.compareTo(b.dueTime));
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ListView.separated(
@@ -21,19 +22,19 @@ class _TasksState extends State<Tasks> {
             endIndent: 15,
                 color: Colors.black,
               ),
-          itemCount: 5,
+          itemCount: tasks.length,
           itemBuilder: (context, index) {
             return TweenAnimationBuilder(
               child: ListTile(
-                title: Text("Title", style: GoogleFonts.secularOne(fontWeight: FontWeight.w500)),
+                title: Text(tasks[index].title, style: GoogleFonts.roboto(fontWeight: FontWeight.w500)),
                 subtitle: Text(
-                    "It is important, It is important,It is important,It is important,It is important,It is important,",
-                    style: GoogleFonts.secularOne(fontWeight: FontWeight.w300),
+                    tasks[index].description,
+                    style: GoogleFonts.roboto(fontWeight: FontWeight.w300),
                     overflow: TextOverflow.ellipsis),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text("Rohan"),
+                    Text(tasks[index].assignedTo != null ? tasks[index].assignedTo.name : loggedInUser.name, style: TextStyle(fontSize: 10.0),),
                     SizedBox(width: 10.0),
                     CircleAvatar(
                       backgroundColor: Colors.black38,
@@ -42,7 +43,12 @@ class _TasksState extends State<Tasks> {
                   ],
                 ),
                 onTap: () {
-                  Navigator.pushNamed(context, "/task-main");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TaskMain(task: tasks[index]),
+                    ),
+                  );
                 },
                 onLongPress: () {},
               ),

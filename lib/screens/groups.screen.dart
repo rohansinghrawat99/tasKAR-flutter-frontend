@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tasker/models/screen_arguments.dart';
 import 'package:tasker/screens/customs/scaffold.custom.dart';
 
 class Groups extends StatefulWidget {
@@ -12,21 +13,11 @@ class _GroupsState extends State<Groups> {
   Widget build(BuildContext context) {
     return CustomScaffold(
       selected: 2,
+      onTapFAB: () {
+        showDialog(context: context, child: groupDialog());
+      },
       children: Column(
         children: <Widget>[
-          ListTile(
-            title: Text("ADD A GROUP"),
-            leading: Icon(
-                Icons.add
-            ),
-            onTap: () {
-              showDialog(context: context, child: groupDialog());
-            },
-          ),
-          Container(
-            color: Colors.black45,
-            height: 1.0,
-          ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(10.0),
@@ -53,7 +44,7 @@ class _GroupsState extends State<Groups> {
                           ],
                         ),
                         onTap: () {
-                          Navigator.pushNamed(context, "/groups/my-tasks");
+                          Navigator.pushNamed(context, "/groups/my-tasks", arguments: ScreenArguments(groupId: 2));
                         },
                         onLongPress: () {},
                       ),

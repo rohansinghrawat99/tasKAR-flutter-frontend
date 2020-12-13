@@ -99,7 +99,7 @@ abstract class APIService {
     }
 
     if (useAuthHeaders) {
-      map['Authorization'] = 'bearer ${await PreferenceService.getInstance().getAuthToken()}';
+      map['Authorization'] = '${await PreferenceService.getInstance().getAuthToken()}';
     }
 
     return map;

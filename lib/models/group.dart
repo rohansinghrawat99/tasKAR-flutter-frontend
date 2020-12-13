@@ -18,6 +18,10 @@ abstract class _Group with Store {
   String name;
 
   @observable
+  @JsonKey(name: 'admin_id')
+  int adminId;
+
+  @observable
   UserModal admin;
 
   @observable
