@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tasker/screens/customs/scaffold.custom.dart';
+import 'package:tasker/screens/customs/store_observer.dart';
 import 'package:tasker/screens/tasks.screen.dart';
 
 class GroupMain extends StatefulWidget {
@@ -68,7 +69,7 @@ class _GroupMainState extends State<GroupMain> {
               ),
             ],
           ),
-          Expanded(child: TaskListDisplay())
+          Expanded(child: StoreObserver())
         ],
       ),
     );

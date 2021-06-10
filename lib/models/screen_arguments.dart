@@ -1,4 +1,4 @@
 class ScreenArguments {
-  final int groupId;
+  final int? groupId;
   ScreenArguments({this.groupId});
 }

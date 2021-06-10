@@ -25,32 +25,35 @@ class TaskListDisplay extends StatelessWidget {
           itemCount: tasks.length,
           itemBuilder: (context, index) {
             return TweenAnimationBuilder(
-              child: ListTile(
-                title: Text(tasks[index].title, style: GoogleFonts.roboto(fontWeight: FontWeight.w500)),
-                subtitle: Text(
-                    tasks[index].description,
-                    style: GoogleFonts.roboto(fontWeight: FontWeight.w300),
-                    overflow: TextOverflow.ellipsis),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Text(tasks[index].assignedTo != null ? tasks[index].assignedTo.name : loggedInUser.name, style: TextStyle(fontSize: 10.0),),
-                    SizedBox(width: 10.0),
-                    CircleAvatar(
-                      backgroundColor: Colors.black38,
-                      radius: 15.0,
-                    ),
-                  ],
+              child: ListTileTheme(
+                tileColor: Colors.grey,
+                child: ListTile(
+                  title: Text(tasks[index].title, style: GoogleFonts.roboto(fontWeight: FontWeight.w500)),
+                  subtitle: Text(
+                      tasks[index].description,
+                      style: GoogleFonts.roboto(fontWeight: FontWeight.w300),
+                      overflow: TextOverflow.ellipsis),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(tasks[index].groupId == null ? tasks[index].dueTime.substring(0, 10) : (tasks[index].assignedTo != null ? tasks[index].assignedTo.name : loggedInUser.name), style: TextStyle(fontSize: 10.0)),
+                      SizedBox(width: 10.0),
+                      tasks[index].groupId == null ? Text("") : CircleAvatar(
+                        backgroundColor: Colors.white12,
+                        radius: 15.0,
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TaskMain(task: tasks[index]),
+                      ),
+                    );
+                  },
+                  onLongPress: () {},
                 ),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TaskMain(task: tasks[index]),
-                    ),
-                  );
-                },
-                onLongPress: () {},
               ),
               tween: Tween<double>(begin: 1, end: 0),
               builder: (BuildContext context, double val, Widget child) {

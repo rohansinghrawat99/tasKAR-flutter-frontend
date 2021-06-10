@@ -19,6 +19,7 @@ Future<Map<String, dynamic>> signInWithGoogle() async {
 
   final UserCredential authResult = await _auth.signInWithCredential(credential);
   final User user = authResult.user;
+  print(user);
 
   if (user != null) {
     assert(!user.isAnonymous);

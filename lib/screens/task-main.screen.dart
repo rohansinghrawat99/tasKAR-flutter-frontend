@@ -24,7 +24,7 @@ class TaskMain extends StatelessWidget {
               Container(
                 child: Text(
                   task.title,
-                  style: GoogleFonts.roboto(fontWeight: FontWeight.w600, fontSize: 30.0, letterSpacing: 2.0),
+                  style: GoogleFonts.roboto(fontWeight: FontWeight.w600, fontSize: 30.0, letterSpacing: 2.0, color: Colors.white),
                 ),
               ),
               SizedBox(height: 20.0),
@@ -32,7 +32,7 @@ class TaskMain extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: Text(
                   task.description,
-                  style: GoogleFonts.roboto(letterSpacing: 2.0),
+                  style: GoogleFonts.roboto(letterSpacing: 2.0, color: Colors.white),
                 ),
               ),
               SizedBox(height: 20.0),
@@ -43,14 +43,14 @@ class TaskMain extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
                       Text("-${task.assignedTo == null ? loggedInUser.name : task.assignedTo.name}",
-                        style: GoogleFonts.secularOne(),
+                        style: GoogleFonts.secularOne(color: Colors.white),
                       ),
                       SizedBox(width: 20.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Text("Due at:    ", style: GoogleFonts.secularOne()),
-                          Text(DateFormat("dd-MM-yyyy  HH:mm").format(DateTime.parse(task.dueTime)))
+                          Text("Due at:    ", style: GoogleFonts.secularOne(color: Colors.white)),
+                          Text(DateFormat("dd-MM-yyyy  HH:mm").format(DateTime.parse(task.dueTime)), style: TextStyle(color: Colors.white),)
                         ],
                       )
                     ],

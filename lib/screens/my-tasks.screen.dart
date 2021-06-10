@@ -29,37 +29,37 @@ class _MyTaskState extends State<MyTask> {
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 1 ? 4 : 0,
-                  color: Colors.grey,
+                  color: tabNumber == 1 ? Colors.white12 : Colors.black54,
                     onPressed: () {
                       setState(() {
                         tabNumber = 1;
                       });
                     },
-                    child: Text("To-Do")),
+                    child: Text("To-Do", style: TextStyle(color: Colors.white))),
               ),
               Expanded(
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 2 ? 4 : 0,
-                    color: Colors.grey,
+                    color: tabNumber == 2 ? Colors.white12 : Colors.black54,
                     onPressed: () {
                       setState(() {
                         tabNumber = 2;
                       });
                     },
-                    child: Text("Completed")),
+                    child: Text("Completed", style: TextStyle(color: Colors.white))),
               ),
               Expanded(
                 flex: 1,
                 child: RaisedButton(
                     elevation: tabNumber == 3 ? 4 : 0,
-                    color: Colors.grey,
+                    color: tabNumber == 3 ? Colors.white12 : Colors.black54,
                     onPressed: () {
                       setState(() {
                         tabNumber = 3;
                       });
                     },
-                    child: Text("Overdue")),
+                    child: Text("Overdue", style: TextStyle(color: Colors.white))),
               ),
             ],
           ),

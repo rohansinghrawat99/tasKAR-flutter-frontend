@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tasker/models/group.dart';
 import 'package:tasker/models/screen_arguments.dart';
 import 'package:tasker/screens/customs/scaffold.custom.dart';
 
-class Groups extends StatefulWidget {
-  @override
-  _GroupsState createState() => _GroupsState();
-}
+class Groups extends StatelessWidget {
+  final List<Group> groups;
+  Groups({required this.groups});
 
-class _GroupsState extends State<Groups> {
   @override
   Widget build(BuildContext context) {
     return CustomScaffold(
       selected: 2,
       onTapFAB: () {
-        showDialog(context: context, child: groupDialog());
+        showDialog(context: context, builder: (context) => groupDialog(context));
       },
       children: Column(
         children: <Widget>[
@@ -29,6 +28,7 @@ class _GroupsState extends State<Groups> {
                   itemBuilder: (context, index) {
                     return TweenAnimationBuilder(
                       child: ListTile(
+                        tileColor: Colors.grey,
                         title: Text("Group Name",
                             style: GoogleFonts.secularOne(fontWeight: FontWeight.w500, letterSpacing: 2.0)),
                         subtitle: Text("AR", style: GoogleFonts.secularOne(fontWeight: FontWeight.w300)),
@@ -46,7 +46,9 @@ class _GroupsState extends State<Groups> {
                         onTap: () {
                           Navigator.pushNamed(context, "/groups/my-tasks", arguments: ScreenArguments(groupId: 2));
                         },
-                        onLongPress: () {},
+                        onLongPress: () {
+                          showDialog(context: context, child: groupOptionsDialog(context, "groups[index].name"));
+                        },
                       ),
                       tween: Tween<double>(begin: 1, end: 0),
                       builder: (BuildContext context, double val, Widget child) {
@@ -68,7 +70,7 @@ class _GroupsState extends State<Groups> {
     );
   }
 
-  Widget groupDialog() {
+  Widget groupDialog(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.white60,
       title: Text("Create a group or Join one", style: GoogleFonts.secularOne(letterSpacing: 1.5)),
@@ -79,6 +81,28 @@ class _GroupsState extends State<Groups> {
         RaisedButton(onPressed: () {
           Navigator.pushNamed(context, "/groups/join");
         }, child: Text("Join", style: GoogleFonts.lobster()))
+      ],
+    );
+  }
+
+  Widget groupOptionsDialog(BuildContext context, groupName) {
+    return AlertDialog(
+      backgroundColor: Colors.white60,
+      title: Text(groupName, style: GoogleFonts.secularOne(letterSpacing: 1.5)),
+      actions: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            RaisedButton(onPressed: () {
+              Navigator.pushNamed(context, "/groups/create");
+            }, child: Text("Members", style: GoogleFonts.lobster())),
+            SizedBox(width: 10.0),
+            RaisedButton(onPressed: () {
+              Navigator.pushNamed(context, "/groups/join");
+            }, child: Text("Edit Group", style: GoogleFonts.lobster()))
+          ],
+        )
       ],
     );
   }

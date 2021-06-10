@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tasker/screens/customs/store_observer.dart';
 import 'package:tasker/store/user_store.dart';
 import 'package:tasker/utils/global.dart';
+import 'package:delayed_display/delayed_display.dart';
 
 class Login extends StatefulWidget {
   static const String routeNamed = "Login";
@@ -21,35 +22,20 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Stack(children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  "assets/login-bg.jpg",
-                ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                "TasKAR",
+                style: GoogleFonts.audiowide(fontSize: 40.0, color: Colors.white),
               ),
-            ),
+              SizedBox(height: 50),
+              DelayedDisplay(delay: Duration(seconds: 1), child: _signInButton())
+            ],
           ),
-          Container(
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "TasKAR",
-                    style: GoogleFonts.audiowide(fontSize: 30.0),
-                  ),
-                  SizedBox(height: 50),
-                  _signInButton(),
-                ],
-              ),
-            ),
-          ),
-        ]),
+        ),
+        backgroundColor: Colors.black,
       ),
     );
   }
@@ -64,8 +50,7 @@ class _LoginState extends State<Login> {
           onPressed: () async {
             try {
               await userStore.login();
-            }
-            catch (e) {
+            } catch (e) {
               showErrorSnackBar(e, context);
             }
             if (userStore.isLoggedIn) {

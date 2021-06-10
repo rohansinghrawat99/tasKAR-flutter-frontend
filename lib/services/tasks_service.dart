@@ -28,6 +28,27 @@ class TasksService extends APIService {
     }
   }
 
+  // Future<Map<int, Task>> fetchGroupToDos(groupId) async {
+  //   try {
+  //     Map<String, dynamic> response = await get(
+  //         "/tasks/my-group-todo/$groupId",
+  //         useAuthHeaders: true
+  //     );
+  //
+  //     Map<int, Map<int, Task>> data = Map<int, Map<int, Task>>;
+  //     if (response.containsKey("data") && response['data'] != null) {
+  //       response['data'].forEach((v) {
+  //         Task task = Task.fromJson(v);
+  //         data.addAll({task.id: task});
+  //       });
+  //     }
+  //     return data;
+  //   }
+  //   catch (e) {
+  //     throw e;
+  //   }
+  // }
+
   Future<Map<int, Task>> fetchMyCompleted() async {
     try {
       Map<String, dynamic> response = await get(
