@@ -14,7 +14,7 @@ class _GroupsState extends State<Groups> {
     return CustomScaffold(
       selected: 2,
       onTapFAB: () {
-        showDialog(context: context, child: groupDialog());
+        showDialog(context: context, builder:(context)=> groupDialog());
       },
       children: Column(
         children: <Widget>[
@@ -49,7 +49,7 @@ class _GroupsState extends State<Groups> {
                         onLongPress: () {},
                       ),
                       tween: Tween<double>(begin: 1, end: 0),
-                      builder: (BuildContext context, double val, Widget child) {
+                      builder: (BuildContext context, double val, Widget? child) {
                         return Opacity(
                           opacity: val == 1 ? 0 : 1,
                           child: Padding(

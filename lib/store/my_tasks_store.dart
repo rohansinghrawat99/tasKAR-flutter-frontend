@@ -11,23 +11,23 @@ abstract class _MyTasksStore with Store {
   bool isLoading = false;
 
   @observable
-  ObservableMap<int, Task> myToDo;
+  ObservableMap<int?, Task>? myToDo;
 
   @observable
-  ObservableMap<int, Task> myCompleted;
+  ObservableMap<int?, Task>? myCompleted;
 
   @observable
-  ObservableMap<int, Task> myOverdue;
+  ObservableMap<int?, Task>? myOverdue;
 
   @action
   Future<void> fetchMyToDos() async {
     if (myToDo != null) return;
-    myToDo = ObservableMap<int, Task>();
+    myToDo = ObservableMap<int?, Task>();
     try {
       isLoading = true;
-      Map<int, Task> response = await TasksService.getInstance().fetchMyToDos();
+      Map<int?, Task> response = await TasksService.getInstance().fetchMyToDos();
       print(response);
-      myToDo.addAll(response);
+      myToDo!.addAll(response);
       isLoading = false;
     } catch (err) {
       isLoading = false;
@@ -38,12 +38,12 @@ abstract class _MyTasksStore with Store {
   @action
   Future<void> fetchMyCompleted() async {
     if (myCompleted != null) return;
-    myCompleted = ObservableMap<int, Task>();
+    myCompleted = ObservableMap<int?, Task>();
     try {
       isLoading = true;
-      Map<int, Task> response = await TasksService.getInstance().fetchMyCompleted();
+      Map<int?, Task> response = await TasksService.getInstance().fetchMyCompleted();
       print(response);
-      myCompleted.addAll(response);
+      myCompleted!.addAll(response);
       isLoading = false;
     } catch (err) {
       isLoading = false;
@@ -54,12 +54,12 @@ abstract class _MyTasksStore with Store {
   @action
   Future<void> fetchMyOverdue() async {
     if (myOverdue != null) return;
-    myOverdue = ObservableMap<int, Task>();
+    myOverdue = ObservableMap<int?, Task>();
     try {
       isLoading = true;
-      Map<int, Task> response = await TasksService.getInstance().fetchMyOverdue();
+      Map<int?, Task> response = await TasksService.getInstance().fetchMyOverdue();
       print(response);
-      myOverdue.addAll(response);
+      myOverdue!.addAll(response);
       isLoading = false;
     } catch (err) {
       isLoading = false;
@@ -76,9 +76,9 @@ abstract class _MyTasksStore with Store {
       // myToDo.clear();
       // Map<int, Task> responseAll = await TasksService.getInstance().fetchMyToDos();
       if (myToDo == null) {
-        myToDo = ObservableMap<int, Task>();
+        myToDo = ObservableMap<int?, Task>();
       }
-      myToDo.addAll({response.id: response});
+      myToDo!.addAll({response.id: response});
       isLoading = false;
     }
     catch (err) {

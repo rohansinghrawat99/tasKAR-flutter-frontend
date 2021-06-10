@@ -72,13 +72,13 @@ class _MyTaskState extends State<MyTask> {
                 return Center(child: CircularProgressIndicator());
               }
               if (tabNumber == 1) {
-                return TaskListDisplay(tasks: myTaskStore.myToDo == null ? [] : myTaskStore.myToDo.values.toList());
+                return TaskListDisplay(tasks: myTaskStore.myToDo == null ? [] : myTaskStore.myToDo!.values.toList());
               }
               if (tabNumber == 2) {
-                return TaskListDisplay(tasks: myTaskStore.myCompleted == null ? [] : myTaskStore.myCompleted.values.toList());
+                return TaskListDisplay(tasks: myTaskStore.myCompleted == null ? [] : myTaskStore.myCompleted!.values.toList());
               }
               if (tabNumber == 3) {
-                return TaskListDisplay(tasks: myTaskStore.myOverdue == null ? [] : myTaskStore.myOverdue.values.toList());
+                return TaskListDisplay(tasks: myTaskStore.myOverdue == null ? [] : myTaskStore.myOverdue!.values.toList());
               }
               return TaskListDisplay(tasks: []);
             }),

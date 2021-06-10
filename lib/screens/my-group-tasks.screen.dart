@@ -10,12 +10,12 @@ class MyGroupTasks extends StatefulWidget {
 
 class _MyGroupTasksState extends State<MyGroupTasks> {
   int tabNumber = 1;
-  int groupId;
+  int? groupId;
 
   @override
   Widget build(BuildContext context) {
     if (groupId == null) {
-      ScreenArguments arguments = ModalRoute.of(context).settings.arguments;
+      ScreenArguments arguments = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
       groupId = arguments.groupId;
     }
     return CustomScaffold(

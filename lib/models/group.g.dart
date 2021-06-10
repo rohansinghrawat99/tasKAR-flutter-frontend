@@ -3,155 +3,127 @@
 part of 'group.dart';
 
 // **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-Group _$GroupFromJson(Map<String, dynamic> json) {
-  return Group()
-    ..id = json['id'] as int
-    ..name = json['name'] as String
-    ..adminId = json['admin_id'] as int
-    ..admin = json['admin'] == null
-        ? null
-        : UserModal.fromJson(json['admin'] as Map<String, dynamic>)
-    ..code = json['code'] as String
-    ..createdAt = json['createdAt'] as String
-    ..updatedAt = json['updatedAt'] as String;
-}
-
-Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'admin_id': instance.adminId,
-      'admin': instance.admin,
-      'code': instance.code,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
-    };
-
-// **************************************************************************
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Group on _Group, Store {
   final _$idAtom = Atom(name: '_Group.id');
 
   @override
-  int get id {
-    _$idAtom.context.enforceReadPolicy(_$idAtom);
-    _$idAtom.reportObserved();
+  int? get id {
+    _$idAtom.reportRead();
     return super.id;
   }
 
   @override
-  set id(int value) {
-    _$idAtom.context.conditionallyRunInAction(() {
+  set id(int? value) {
+    _$idAtom.reportWrite(value, super.id, () {
       super.id = value;
-      _$idAtom.reportChanged();
-    }, _$idAtom, name: '${_$idAtom.name}_set');
+    });
   }
 
   final _$nameAtom = Atom(name: '_Group.name');
 
   @override
-  String get name {
-    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
-    _$nameAtom.reportObserved();
+  String? get name {
+    _$nameAtom.reportRead();
     return super.name;
   }
 
   @override
-  set name(String value) {
-    _$nameAtom.context.conditionallyRunInAction(() {
+  set name(String? value) {
+    _$nameAtom.reportWrite(value, super.name, () {
       super.name = value;
-      _$nameAtom.reportChanged();
-    }, _$nameAtom, name: '${_$nameAtom.name}_set');
+    });
   }
 
   final _$adminIdAtom = Atom(name: '_Group.adminId');
 
   @override
-  int get adminId {
-    _$adminIdAtom.context.enforceReadPolicy(_$adminIdAtom);
-    _$adminIdAtom.reportObserved();
+  int? get adminId {
+    _$adminIdAtom.reportRead();
     return super.adminId;
   }
 
   @override
-  set adminId(int value) {
-    _$adminIdAtom.context.conditionallyRunInAction(() {
+  set adminId(int? value) {
+    _$adminIdAtom.reportWrite(value, super.adminId, () {
       super.adminId = value;
-      _$adminIdAtom.reportChanged();
-    }, _$adminIdAtom, name: '${_$adminIdAtom.name}_set');
+    });
   }
 
   final _$adminAtom = Atom(name: '_Group.admin');
 
   @override
-  UserModal get admin {
-    _$adminAtom.context.enforceReadPolicy(_$adminAtom);
-    _$adminAtom.reportObserved();
+  UserModal? get admin {
+    _$adminAtom.reportRead();
     return super.admin;
   }
 
   @override
-  set admin(UserModal value) {
-    _$adminAtom.context.conditionallyRunInAction(() {
+  set admin(UserModal? value) {
+    _$adminAtom.reportWrite(value, super.admin, () {
       super.admin = value;
-      _$adminAtom.reportChanged();
-    }, _$adminAtom, name: '${_$adminAtom.name}_set');
+    });
   }
 
   final _$codeAtom = Atom(name: '_Group.code');
 
   @override
-  String get code {
-    _$codeAtom.context.enforceReadPolicy(_$codeAtom);
-    _$codeAtom.reportObserved();
+  String? get code {
+    _$codeAtom.reportRead();
     return super.code;
   }
 
   @override
-  set code(String value) {
-    _$codeAtom.context.conditionallyRunInAction(() {
+  set code(String? value) {
+    _$codeAtom.reportWrite(value, super.code, () {
       super.code = value;
-      _$codeAtom.reportChanged();
-    }, _$codeAtom, name: '${_$codeAtom.name}_set');
+    });
   }
 
   final _$createdAtAtom = Atom(name: '_Group.createdAt');
 
   @override
-  String get createdAt {
-    _$createdAtAtom.context.enforceReadPolicy(_$createdAtAtom);
-    _$createdAtAtom.reportObserved();
+  String? get createdAt {
+    _$createdAtAtom.reportRead();
     return super.createdAt;
   }
 
   @override
-  set createdAt(String value) {
-    _$createdAtAtom.context.conditionallyRunInAction(() {
+  set createdAt(String? value) {
+    _$createdAtAtom.reportWrite(value, super.createdAt, () {
       super.createdAt = value;
-      _$createdAtAtom.reportChanged();
-    }, _$createdAtAtom, name: '${_$createdAtAtom.name}_set');
+    });
   }
 
   final _$updatedAtAtom = Atom(name: '_Group.updatedAt');
 
   @override
-  String get updatedAt {
-    _$updatedAtAtom.context.enforceReadPolicy(_$updatedAtAtom);
-    _$updatedAtAtom.reportObserved();
+  String? get updatedAt {
+    _$updatedAtAtom.reportRead();
     return super.updatedAt;
   }
 
   @override
-  set updatedAt(String value) {
-    _$updatedAtAtom.context.conditionallyRunInAction(() {
+  set updatedAt(String? value) {
+    _$updatedAtAtom.reportWrite(value, super.updatedAt, () {
       super.updatedAt = value;
-      _$updatedAtAtom.reportChanged();
-    }, _$updatedAtAtom, name: '${_$updatedAtAtom.name}_set');
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+id: ${id},
+name: ${name},
+adminId: ${adminId},
+admin: ${admin},
+code: ${code},
+createdAt: ${createdAt},
+updatedAt: ${updatedAt}
+    ''';
   }
 }

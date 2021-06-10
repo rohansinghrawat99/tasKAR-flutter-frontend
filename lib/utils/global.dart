@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-showErrorSnackBar(var e, BuildContext context, {String message}) {
+showErrorSnackBar(var e, BuildContext context, {String? message}) {
   if (e.runtimeType == SocketException) {
     showSnackBar("NO INTERNET CONNECTION", context);
     return;
@@ -9,7 +9,7 @@ showErrorSnackBar(var e, BuildContext context, {String message}) {
   showSnackBar(e.message, context);
 }
 
-void showSnackBar(String text, BuildContext context, {Duration duration}) {
+void showSnackBar(String? text, BuildContext context, {Duration? duration}) {
   if (duration == null) {
     duration = Duration(milliseconds: 2500);
   }
@@ -19,7 +19,7 @@ void showSnackBar(String text, BuildContext context, {Duration duration}) {
       ..showSnackBar(
         SnackBar(
           content: Text(
-            text,
+            text!,
             style: TextStyle(fontSize: 14, color: Colors.white),
           ),
           backgroundColor: Colors.black,

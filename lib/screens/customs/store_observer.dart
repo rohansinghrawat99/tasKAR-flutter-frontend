@@ -6,7 +6,7 @@ typedef ProviderWidgetBuilder<T> = Widget Function(
     T provider, BuildContext context);
 
 class StoreObserver<T> extends StatelessWidget {
-  const StoreObserver({@required this.builder});
+  const StoreObserver({required this.builder});
 
   final ProviderWidgetBuilder<T> builder;
 

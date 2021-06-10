@@ -12,24 +12,24 @@ class Group extends _Group with _$Group {
 
 abstract class _Group with Store {
   @observable
-  int id;
+  int? id;
 
   @observable
-  String name;
+  String? name;
 
   @observable
   @JsonKey(name: 'admin_id')
-  int adminId;
+  int? adminId;
 
   @observable
-  UserModal admin;
+  UserModal? admin;
 
   @observable
-  String code;
+  String? code;
 
   @observable
-  String createdAt;
+  String? createdAt;
 
   @observable
-  String updatedAt;
+  String? updatedAt;
 }

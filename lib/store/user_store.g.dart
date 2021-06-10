@@ -6,85 +6,90 @@ part of 'user_store.dart';
 // StoreGenerator
 // **************************************************************************
 
-// ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
+// ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserStore on _UserStore, Store {
   final _$isLoadingAtom = Atom(name: '_UserStore.isLoading');
 
   @override
   bool get isLoading {
-    _$isLoadingAtom.context.enforceReadPolicy(_$isLoadingAtom);
-    _$isLoadingAtom.reportObserved();
+    _$isLoadingAtom.reportRead();
     return super.isLoading;
   }
 
   @override
   set isLoading(bool value) {
-    _$isLoadingAtom.context.conditionallyRunInAction(() {
+    _$isLoadingAtom.reportWrite(value, super.isLoading, () {
       super.isLoading = value;
-      _$isLoadingAtom.reportChanged();
-    }, _$isLoadingAtom, name: '${_$isLoadingAtom.name}_set');
+    });
   }
 
   final _$isLoggedInAtom = Atom(name: '_UserStore.isLoggedIn');
 
   @override
   bool get isLoggedIn {
-    _$isLoggedInAtom.context.enforceReadPolicy(_$isLoggedInAtom);
-    _$isLoggedInAtom.reportObserved();
+    _$isLoggedInAtom.reportRead();
     return super.isLoggedIn;
   }
 
   @override
   set isLoggedIn(bool value) {
-    _$isLoggedInAtom.context.conditionallyRunInAction(() {
+    _$isLoggedInAtom.reportWrite(value, super.isLoggedIn, () {
       super.isLoggedIn = value;
-      _$isLoggedInAtom.reportChanged();
-    }, _$isLoggedInAtom, name: '${_$isLoggedInAtom.name}_set');
+    });
   }
 
   final _$loggedInUserAtom = Atom(name: '_UserStore.loggedInUser');
 
   @override
-  UserModal get loggedInUser {
-    _$loggedInUserAtom.context.enforceReadPolicy(_$loggedInUserAtom);
-    _$loggedInUserAtom.reportObserved();
+  UserModal? get loggedInUser {
+    _$loggedInUserAtom.reportRead();
     return super.loggedInUser;
   }
 
   @override
-  set loggedInUser(UserModal value) {
-    _$loggedInUserAtom.context.conditionallyRunInAction(() {
+  set loggedInUser(UserModal? value) {
+    _$loggedInUserAtom.reportWrite(value, super.loggedInUser, () {
       super.loggedInUser = value;
-      _$loggedInUserAtom.reportChanged();
-    }, _$loggedInUserAtom, name: '${_$loggedInUserAtom.name}_set');
+    });
   }
 
-  final _$loginAsyncAction = AsyncAction('login');
+  final _$loginAsyncAction = AsyncAction('_UserStore.login');
 
   @override
   Future<void> login() {
     return _$loginAsyncAction.run(() => super.login());
   }
 
-  final _$fetchUserDetailsAsyncAction = AsyncAction('fetchUserDetails');
+  final _$fetchUserDetailsAsyncAction =
+      AsyncAction('_UserStore.fetchUserDetails');
 
   @override
-  Future fetchUserDetails() {
+  Future<dynamic> fetchUserDetails() {
     return _$fetchUserDetailsAsyncAction.run(() => super.fetchUserDetails());
   }
 
-  final _$setLoggedInUserAsyncAction = AsyncAction('setLoggedInUser');
+  final _$setLoggedInUserAsyncAction =
+      AsyncAction('_UserStore.setLoggedInUser');
 
   @override
   Future<void> setLoggedInUser(UserModal user) {
     return _$setLoggedInUserAsyncAction.run(() => super.setLoggedInUser(user));
   }
 
-  final _$clearUserStoreAsyncAction = AsyncAction('clearUserStore');
+  final _$clearUserStoreAsyncAction = AsyncAction('_UserStore.clearUserStore');
 
   @override
   Future<void> clearUserStore() {
     return _$clearUserStoreAsyncAction.run(() => super.clearUserStore());
+  }
+
+  @override
+  String toString() {
+    return '''
+isLoading: ${isLoading},
+isLoggedIn: ${isLoggedIn},
+loggedInUser: ${loggedInUser}
+    ''';
   }
 }

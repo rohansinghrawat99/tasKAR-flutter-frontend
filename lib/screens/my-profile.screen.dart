@@ -7,7 +7,7 @@ import 'package:tasker/services/preference_service.dart';
 import 'package:tasker/store/user_store.dart';
 
 class MyProfile extends StatelessWidget {
-  UserModal loggedInUser;
+  UserModal? loggedInUser;
   @override
   Widget build(BuildContext context) {
     if (loggedInUser == null) {
@@ -31,7 +31,7 @@ class MyProfile extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(loggedInUser.profilePictureUrl ?? "https://www.xovi.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"),
+                    image: NetworkImage(loggedInUser!.profilePictureUrl ?? "https://www.xovi.com/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png"),
                   ),
                   borderRadius: BorderRadius.all(Radius.circular(20.0)),
                   color: Colors.redAccent,
@@ -44,7 +44,7 @@ class MyProfile extends StatelessWidget {
                       style: GoogleFonts.lobster(
                           fontSize: 25.0, fontWeight: FontWeight.w800)),
                   SizedBox(width: 10.0),
-                  Text(loggedInUser.name,
+                  Text(loggedInUser!.name!,
                       style: GoogleFonts.secularOne(
                           fontSize: 25.0, fontWeight: FontWeight.w300))
                 ],
@@ -55,7 +55,7 @@ class MyProfile extends StatelessWidget {
                       style: GoogleFonts.lobster(
                           fontSize: 25.0, fontWeight: FontWeight.w800)),
                   SizedBox(width: 10.0),
-                  Text(loggedInUser.email,
+                  Text(loggedInUser!.email!,
                       style: GoogleFonts.secularOne(
                           fontSize: 20.0, fontWeight: FontWeight.w300))
                 ],
@@ -66,7 +66,7 @@ class MyProfile extends StatelessWidget {
   }
 
   getLoggedInUser() async{
-    UserModal loggedInUser = await PreferenceService.getInstance().getAuthUser();
+    UserModal? loggedInUser = await PreferenceService.getInstance().getAuthUser();
     return loggedInUser;
   }
 }

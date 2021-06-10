@@ -17,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       checkUser();
     });
   }
@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   
   checkUser() async {
-    String token = await PreferenceService.getInstance().getAuthToken();
+    String? token = await PreferenceService.getInstance().getAuthToken();
     if (token == null) {
       Navigator.pushReplacementNamed(context, Login.routeNamed);
     }

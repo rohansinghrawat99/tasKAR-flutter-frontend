@@ -16,13 +16,13 @@ abstract class _UserStore with Store {
   bool isLoggedIn = false;
 
   @observable
-  UserModal loggedInUser;
+  UserModal? loggedInUser;
 
   @action
   Future<void> login() async {
     try {
       isLoading = true;
-      UserModal response = await AuthService.getInstance().login();
+      UserModal? response = await AuthService.getInstance().login();
       if (response != null) {
         setLoggedInUser(response);
       }

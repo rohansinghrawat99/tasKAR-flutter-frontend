@@ -15,20 +15,20 @@ class GroupUser extends _GroupUser with _$GroupUser {
 
 abstract class _GroupUser with Store {
   @observable
-  int id;
+  int? id;
 
   @observable
-  Group group;
+  Group? group;
 
   @observable
-  UserModal member;
+  UserModal? member;
 
   @observable
-  GroupRole role;
+  GroupRole? role;
 
   @observable
-  String createdAt;
+  String? createdAt;
 
   @observable
-  String updatedAt;
+  String? updatedAt;
 }

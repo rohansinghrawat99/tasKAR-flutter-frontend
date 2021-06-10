@@ -7,14 +7,14 @@ class TasksService extends APIService {
   factory TasksService.getInstance() => _instance;
   static final TasksService _instance = TasksService._();
 
-  Future<Map<int, Task>> fetchMyToDos() async {
+  Future<Map<int?, Task>> fetchMyToDos() async {
     try {
-      Map<String, dynamic> response = await get(
+      Map<String, dynamic> response = await (get(
         "/tasks/personal-todo",
         useAuthHeaders: true
-      );
+      ) as Future<Map<String, dynamic>>);
 
-      Map<int, Task> data = Map<int, Task>();
+      Map<int?, Task> data = Map<int?, Task>();
       if (response.containsKey("data") && response['data'] != null) {
         response['data'].forEach((v) {
           Task task = Task.fromJson(v);
@@ -28,15 +28,15 @@ class TasksService extends APIService {
     }
   }
 
-  Future<Map<int, Task>> fetchMyCompleted() async {
+  Future<Map<int?, Task>> fetchMyCompleted() async {
     try {
-      Map<String, dynamic> response = await get(
+      Map<String, dynamic> response = await (get(
           "/tasks/personal-completed",
           useAuthHeaders: true
-      );
+      ) as Future<Map<String, dynamic>>);
 
 
-      Map<int, Task> data = Map<int, Task>();
+      Map<int?, Task> data = Map<int?, Task>();
       if (response.containsKey("data") && response['data'] != null) {
         response['data'].forEach((v) {
           Task task = Task.fromJson(v);
@@ -50,15 +50,15 @@ class TasksService extends APIService {
     }
   }
 
-  Future<Map<int, Task>> fetchMyOverdue() async {
+  Future<Map<int?, Task>> fetchMyOverdue() async {
     try {
-      Map<String, dynamic> response = await get(
+      Map<String, dynamic> response = await (get(
           "/tasks/personal-overdue",
           useAuthHeaders: true
-      );
+      ) as Future<Map<String, dynamic>>);
 
 
-      Map<int, Task> data = Map<int, Task>();
+      Map<int?, Task> data = Map<int?, Task>();
       if (response.containsKey("data") && response['data'] != null) {
         response['data'].forEach((v) {
           Task task = Task.fromJson(v);
@@ -74,11 +74,11 @@ class TasksService extends APIService {
 
   Future<Task> addTask(Map<String, dynamic> body) async {
     try {
-      Map<String, dynamic> response = await post(
+      Map<String, dynamic> response = await (post(
         "/tasks",
         body: body,
         useAuthHeaders: true
-      );
+      ) as Future<Map<String, dynamic>>);
       Task task = Task.fromJson(response['data']);
       return task;
     }

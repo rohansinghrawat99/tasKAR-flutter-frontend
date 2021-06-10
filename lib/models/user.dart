@@ -11,25 +11,25 @@ class UserModal extends _UserModal with _$UserModal {
 
 abstract class _UserModal with Store {
   @observable
-  int id;
+  int? id;
 
   @observable
-  String name;
+  String? name;
 
   @observable
   @JsonKey(name: 'google_id')
-  String googleId;
+  String? googleId;
 
   @observable
-  String email;
+  String? email;
 
   @observable
   @JsonKey(name: 'profile_pic_url')
-  String profilePictureUrl;
+  String? profilePictureUrl;
 
   @observable
-  String createdAt;
+  String? createdAt;
 
   @observable
-  String updatedAt;
+  String? updatedAt;
 }

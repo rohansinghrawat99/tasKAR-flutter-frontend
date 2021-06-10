@@ -9,12 +9,13 @@ import 'package:tasker/services/preference_service.dart';
 String BASE_URL = "https://ar-taskers-backend.herokuapp.com";
 
 abstract class APIService {
-  Future<Map<String, dynamic>> get(String url,
+  Future<Map<String, dynamic>?> get(String url,
       // ignore: avoid_init_to_null
-          {Map<String, dynamic> params = null,
-        bool useAuthHeaders = true}) async {
+      {Map<String, dynamic>? params = null,
+      bool useAuthHeaders = true}) async {
     try {
-      var data = await http.get(_getUrlWithParams(url, params: params),
+      var data = await http.get(
+          Uri.parse(_getUrlWithParams(url, params: params)),
           headers: await _getHeaders(useAuthHeaders: useAuthHeaders));
       return _getResponse(data);
     } catch (e) {
@@ -22,15 +23,16 @@ abstract class APIService {
     }
   }
 
-  Future<Map<String, dynamic>> post(String url,
-      {@required Map<String, dynamic> body,
-        bool useAuthHeaders = true,
-        type = RequestType.JSON,
-        Map<String, dynamic> params}) async {
+  Future<Map<String, dynamic>?> post(String url,
+      {required Map<String, dynamic> body,
+      bool useAuthHeaders = true,
+      type = RequestType.JSON,
+      Map<String, dynamic>? params}) async {
     try {
-      final response = await http.post(_getUrlWithParams(url, params: params),
+      final response = await http.post(
+          Uri.parse(_getUrlWithParams(url, params: params)),
           headers:
-          await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
+              await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
           body: type == RequestType.FORM ? body : json.encode(body));
       return _getResponse(response);
     } catch (e) {
@@ -38,15 +40,16 @@ abstract class APIService {
     }
   }
 
-  Future<Map<String, dynamic>> patch(String url,
-      {@required Map<String, dynamic> body,
-        bool useAuthHeaders = true,
-        type = RequestType.JSON,
-        Map<String, dynamic> params}) async {
+  Future<Map<String, dynamic>?> patch(String url,
+      {required Map<String, dynamic> body,
+      bool useAuthHeaders = true,
+      type = RequestType.JSON,
+      Map<String, dynamic>? params}) async {
     try {
-      final response = await http.patch(_getUrlWithParams(url, params: params),
+      final response = await http.patch(
+          Uri.parse(_getUrlWithParams(url, params: params)),
           headers:
-          await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
+              await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
           body: type == RequestType.FORM ? body : json.encode(body));
       return _getResponse(response);
     } catch (e) {
@@ -54,15 +57,16 @@ abstract class APIService {
     }
   }
 
-  Future<Map<String, dynamic>> put(String url,
-      {@required Map<String, dynamic> body,
-        bool useAuthHeaders = true,
-        Map<String, dynamic> params,
-        type = RequestType.JSON}) async {
+  Future<Map<String, dynamic>?> put(String url,
+      {required Map<String, dynamic> body,
+      bool useAuthHeaders = true,
+      Map<String, dynamic>? params,
+      type = RequestType.JSON}) async {
     try {
-      final response = await http.put(_getUrlWithParams(url, params: params),
+      final response = await http.put(
+          Uri.parse(_getUrlWithParams(url, params: params)),
           headers:
-          await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
+              await _getHeaders(useAuthHeaders: useAuthHeaders, type: type),
           body: type == RequestType.FORM ? body : json.encode(body));
 
       return _getResponse(response);
@@ -71,10 +75,11 @@ abstract class APIService {
     }
   }
 
-  Future<Map<String, dynamic>> delete(String url,
-      {bool useAuthHeaders = true, Map<String, dynamic> params}) async {
+  Future<Map<String, dynamic>?> delete(String url,
+      {bool useAuthHeaders = true, Map<String, dynamic>? params}) async {
     try {
-      final response = await http.delete(_getUrlWithParams(url, params: params),
+      final response = await http.delete(
+          Uri.parse(_getUrlWithParams(url, params: params)),
           headers: await _getHeaders(useAuthHeaders: useAuthHeaders));
 
       return _getResponse(response);
@@ -99,13 +104,14 @@ abstract class APIService {
     }
 
     if (useAuthHeaders) {
-      map['Authorization'] = '${await PreferenceService.getInstance().getAuthToken()}';
+      map['Authorization'] =
+          '${await PreferenceService.getInstance().getAuthToken()}';
     }
 
     return map;
   }
 
-  String _getUrlWithParams(String url, {Map<String, dynamic> params}) {
+  String _getUrlWithParams(String url, {Map<String, dynamic>? params}) {
     var absUrl = _getUrl(url);
 
     if (params != null) {
@@ -120,15 +126,15 @@ abstract class APIService {
     return absUrl;
   }
 
-  Map<String, dynamic> _getResponse(http.Response response) {
+  Map<String, dynamic>? _getResponse(http.Response response) {
     print("api service");
     print(response.statusCode.toString());
     print(response.body.toString());
-    print(response.request.url.toString());
+    print(response.request!.url.toString());
 
     if (response.statusCode == 204 || response.body.isEmpty) return null;
 
-    final Map<String, dynamic> body = json.decode(response.body);
+    final Map<String, dynamic>? body = json.decode(response.body);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return body;
     } else {

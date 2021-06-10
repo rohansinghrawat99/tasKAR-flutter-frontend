@@ -14,45 +14,45 @@ class Task extends _Task with _$Task {
 
 abstract class _Task with Store {
   @observable
-  int id;
+  int? id;
 
   @observable
-  String title;
+  String? title;
 
   @observable
-  String description;
+  String? description;
 
   @observable
   @JsonKey(name: 'group_id')
-  int groupId;
+  int? groupId;
 
   @observable
-  Group group;
+  Group? group;
 
   @observable
   @JsonKey(name: 'assigned_to_id')
-  int assignedToId;
+  int? assignedToId;
 
   @observable
-  UserModal assignedTo;
+  UserModal? assignedTo;
 
   @observable
   @JsonKey(name: 'due_time')
-  String dueTime;
+  String? dueTime;
 
   @observable
-  String status;
+  String? status;
 
   @observable
   @JsonKey(name: 'creator_id')
-  int creatorId;
+  int? creatorId;
 
   @observable
-  UserModal creatorUser;
+  UserModal? creatorUser;
 
   @observable
-  String createdAt;
+  String? createdAt;
 
   @observable
-  String updatedAt;
+  String? updatedAt;
 }

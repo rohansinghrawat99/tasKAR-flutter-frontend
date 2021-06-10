@@ -7,13 +7,13 @@ import 'package:tasker/screens/task-main.screen.dart';
 import 'package:tasker/store/user_store.dart';
 
 class TaskListDisplay extends StatelessWidget {
-  final List<Task> tasks;
+  final List<Task>? tasks;
   TaskListDisplay({this.tasks});
   @override
   Widget build(BuildContext context) {
-    if (tasks == null || tasks.isEmpty) return Text("NO TASKS YET");
-    UserModal loggedInUser = Provider.of<UserStore>(context).loggedInUser;
-    tasks.sort((a,b) => a.dueTime.compareTo(b.dueTime));
+    if (tasks == null || tasks!.isEmpty) return Text("NO TASKS YET");
+    UserModal? loggedInUser = Provider.of<UserStore>(context).loggedInUser;
+    tasks!.sort((a,b) => a.dueTime!.compareTo(b.dueTime!));
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: ListView.separated(
@@ -22,19 +22,19 @@ class TaskListDisplay extends StatelessWidget {
             endIndent: 15,
                 color: Colors.black,
               ),
-          itemCount: tasks.length,
+          itemCount: tasks!.length,
           itemBuilder: (context, index) {
             return TweenAnimationBuilder(
               child: ListTile(
-                title: Text(tasks[index].title, style: GoogleFonts.roboto(fontWeight: FontWeight.w500)),
+                title: Text(tasks![index].title!, style: GoogleFonts.roboto(fontWeight: FontWeight.w500)),
                 subtitle: Text(
-                    tasks[index].description,
+                    tasks![index].description!,
                     style: GoogleFonts.roboto(fontWeight: FontWeight.w300),
                     overflow: TextOverflow.ellipsis),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Text(tasks[index].assignedTo != null ? tasks[index].assignedTo.name : loggedInUser.name, style: TextStyle(fontSize: 10.0),),
+                    Text(tasks![index].assignedTo != null ? tasks![index].assignedTo!.name! : loggedInUser!.name!, style: TextStyle(fontSize: 10.0),),
                     SizedBox(width: 10.0),
                     CircleAvatar(
                       backgroundColor: Colors.black38,
@@ -46,14 +46,14 @@ class TaskListDisplay extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => TaskMain(task: tasks[index]),
+                      builder: (context) => TaskMain(task: tasks![index]),
                     ),
                   );
                 },
                 onLongPress: () {},
               ),
               tween: Tween<double>(begin: 1, end: 0),
-              builder: (BuildContext context, double val, Widget child) {
+              builder: (BuildContext context, double val, Widget? child) {
                 return Opacity(
                   opacity: val == 1 ? 0 : 1,
                   child: Padding(

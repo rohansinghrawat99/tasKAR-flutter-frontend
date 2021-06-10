@@ -16,10 +16,10 @@ class CreateTask extends StatefulWidget {
 }
 
 class _CreateTaskState extends State<CreateTask> {
-  int groupId;
+  int? groupId;
   final myController1 = TextEditingController();
   final myController2 = TextEditingController();
-  String pickedDateTime;
+  String? pickedDateTime;
 
   void dispose() {
     myController1.dispose();
@@ -30,7 +30,7 @@ class _CreateTaskState extends State<CreateTask> {
   @override
   Widget build(BuildContext context) {
     if (groupId == null) {
-      ScreenArguments arguments = ModalRoute.of(context).settings.arguments;
+      ScreenArguments? arguments = ModalRoute.of(context)!.settings.arguments as ScreenArguments?;
       groupId = arguments == null || arguments.groupId == null
           ? -1
           : arguments.groupId;
@@ -95,7 +95,7 @@ class _CreateTaskState extends State<CreateTask> {
                       },
                     ),
                     Container(
-                      child: Text(pickedDateTime == null ? "" : DateFormat("dd-MM-yyyy (HH:mm)").format(DateTime.parse(pickedDateTime))),
+                      child: Text(pickedDateTime == null ? "" : DateFormat("dd-MM-yyyy (HH:mm)").format(DateTime.parse(pickedDateTime!))),
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black87)
                       ),
@@ -112,7 +112,7 @@ class _CreateTaskState extends State<CreateTask> {
                             return;
                           }
                           if (myTaskStore.isLoading) return;
-                          UserModal loggedInUser = await PreferenceService.getInstance().getAuthUser();
+                          UserModal loggedInUser = await (PreferenceService.getInstance().getAuthUser() as Future<UserModal>);
                           Task task = Task();
                           task.title = myController1.value.text;
                           task.description = myController2.value.text;

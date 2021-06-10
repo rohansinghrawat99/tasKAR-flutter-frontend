@@ -20,27 +20,27 @@ class PreferenceService {
     (await _getInstance()).setString(PreferenceService.TOKEN, token);
   }
 
-  Future<String> getAuthToken() async {
+  Future<String?> getAuthToken() async {
     return (await _getInstance()).getString(PreferenceService.TOKEN);
   }
 
   Future<void> removeAuthToken() async {
-    (await _getInstance()).setString(PreferenceService.TOKEN, null);
+    (await this._getInstance()).remove(PreferenceService.TOKEN);
   }
 
   Future<void> setAuthUser(UserModal user) async {
+    // ignore: unnecessary_null_comparison
     if (user != null) {
-      (await _getInstance()).setString(
-          PreferenceService.LOGGED_IN_USER,json.encode(UserModal.toJson(user)) );
+      (await _getInstance()).setString(PreferenceService.LOGGED_IN_USER,
+          json.encode(UserModal.toJson(user)));
     } else {
-      (await _getInstance())
-          .setString(PreferenceService.LOGGED_IN_USER, null);
+      (await this._getInstance()).remove(PreferenceService.LOGGED_IN_USER);
     }
   }
 
-  Future<UserModal> getAuthUser() async {
-    final String user =
-    (await _getInstance()).getString(PreferenceService.LOGGED_IN_USER);
+  Future<UserModal?> getAuthUser() async {
+    final String? user =
+        (await _getInstance()).getString(PreferenceService.LOGGED_IN_USER);
     if (user == null) {
       return null;
     }
@@ -48,6 +48,6 @@ class PreferenceService {
   }
 
   Future<void> removeAuthUser() async {
-    (await _getInstance()).setString(PreferenceService.LOGGED_IN_USER, null);
+    (await this._getInstance()).remove(PreferenceService.LOGGED_IN_USER);
   }
 }

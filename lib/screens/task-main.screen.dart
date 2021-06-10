@@ -8,12 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
 class TaskMain extends StatelessWidget {
-  final Task task;
+  final Task? task;
   TaskMain({this.task});
 
   @override
   Widget build(BuildContext context) {
-    UserModal loggedInUser = Provider.of<UserStore>(context).loggedInUser;
+    UserModal? loggedInUser = Provider.of<UserStore>(context).loggedInUser;
     return CustomScaffold(
       children: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -23,7 +23,7 @@ class TaskMain extends StatelessWidget {
             children: <Widget>[
               Container(
                 child: Text(
-                  task.title,
+                  task!.title!,
                   style: GoogleFonts.roboto(fontWeight: FontWeight.w600, fontSize: 30.0, letterSpacing: 2.0),
                 ),
               ),
@@ -31,7 +31,7 @@ class TaskMain extends StatelessWidget {
               Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  task.description,
+                  task!.description!,
                   style: GoogleFonts.roboto(letterSpacing: 2.0),
                 ),
               ),
@@ -42,7 +42,7 @@ class TaskMain extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: <Widget>[
-                      Text("-${task.assignedTo == null ? loggedInUser.name : task.assignedTo.name}",
+                      Text("-${task!.assignedTo == null ? loggedInUser!.name : task!.assignedTo!.name}",
                         style: GoogleFonts.secularOne(),
                       ),
                       SizedBox(width: 20.0),
@@ -50,7 +50,7 @@ class TaskMain extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Text("Due at:    ", style: GoogleFonts.secularOne()),
-                          Text(DateFormat("dd-MM-yyyy  HH:mm").format(DateTime.parse(task.dueTime)))
+                          Text(DateFormat("dd-MM-yyyy  HH:mm").format(DateTime.parse(task!.dueTime!)))
                         ],
                       )
                     ],

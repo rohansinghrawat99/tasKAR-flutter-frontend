@@ -11,19 +11,19 @@ class AuthService extends APIService {
   factory AuthService.getInstance() => _instance;
   static final AuthService _instance = AuthService._();
 
-  String refEmail;
+  String? refEmail;
 
-  Future<UserModal> login() async {
+  Future<UserModal?> login() async {
     try {
-      Map<String, dynamic> body = await signInWithGoogle();
+      Map<String, dynamic>? body = await signInWithGoogle();
       if (body == null) {
         return null;
       }
-      Map<String, dynamic> response = await post(
+      Map<String, dynamic> response = await (post(
         '/login',
         body: body,
         useAuthHeaders: false,
-      );
+      ) as Future<Map<String, dynamic>>);
 
       print(response);
       PreferenceService.getInstance().setAuthToken(response['token']);
@@ -70,10 +70,10 @@ class AuthService extends APIService {
   //
   Future<UserModal> fetchMe() async {
     try {
-      Map<String, dynamic> response = await get(
+      Map<String, dynamic> response = await (get(
         '/me',
         useAuthHeaders: true,
-      );
+      ) as Future<Map<String, dynamic>>);
       UserModal user = UserModal.fromJson(response['data']);
       return user;
     } catch (e) {
